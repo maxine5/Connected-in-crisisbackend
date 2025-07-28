@@ -49,17 +49,19 @@ app.get('/', (req, res) => {
 });
 
 // Search route
-app.post('/lookup', (req, res) => {
-  const { name, dob } = req.body;
+app.get('/lookup', (req, res) => {
+  const { name, dob } = req.query;
   db.get('SELECT shelter FROM evacuees WHERE name = ? AND dob = ?', [name, dob], (err, row) => {
-    if (err) return res.status(500).send('Error querying database.');
+    if (err) {
+  console.error("DB error in /lookup:", err);
+  return res.status(500).send("Error querying database.");
+}
     if (row) {
       const result = `Name: ${name}<br>DOB: ${dob}<br>Shelter: ${row.shelter}`;
       res.redirect(`https://maxine5.github.io/Connected-in-crisis/result_template.html?r=${encodeURIComponent(result)}`);
     } else {
       res.redirect(`https://maxine5.github.io/Connected-in-crisis/result_template.html?r=${encodeURIComponent('No matching evacuee found.')}`);
     }
-     res.redirect(`/qr_confirm.html?name=${encodeURIComponent(evacuee.name)}&dob=${encodeURIComponent(evacuee.dob)}&shelter=${encodeURIComponent(evacuee.shelter)}`);
 });
   });
 
@@ -186,6 +188,7 @@ app.post('/delete-evacuee', (req, res) => {
   });
 });
 app.post('/assign-qr', (req, res) => {
+  console.log("QR FORM DATA:", req.body);
   const { qr_id, name, dob, shelter } = req.body;
 
   // First insert the evacuee into the evacuees table
