@@ -315,7 +315,9 @@ app.get('/qr-confirm/:qr_id', (req, res) => {
     }
   );
 });
-
+app.use((req, res) => {
+  res.status(404).send(`Route ${req.originalUrl} not found`);
+});
 
 // Start the server
 const PORT = process.env.PORT || 3000;
