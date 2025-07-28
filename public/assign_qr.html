@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Assign QR Code</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      background-image: url('background.png');
+      background-size: cover;
+      background-position: center;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+
+    .assign-box {
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+      animation: fadeIn 0.8s ease-in-out;
+      width: 100%;
+      max-width: 400px;
+    }
+
+    .assign-box h1 {
+      color: #3742fa;
+      margin-bottom: 1rem;
+    }
+
+    label {
+      display: block;
+      margin-top: 1rem;
+      font-weight: bold;
+    }
+
+    input {
+      width: 100%;
+      padding: 0.5rem;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      margin-top: 0.25rem;
+    }
+
+    button {
+      margin-top: 1.5rem;
+      padding: 0.6rem 1.2rem;
+      background-color: #3742fa;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    button:hover {
+      background-color: #2f36c8;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <div class="assign-box">
+    <h1>Assign QR Code</h1>
+    <form method="POST" action="https://connected-in-crisisbackend.onrender.com/assign-qr">
+      <input type="hidden" name="qr_id" id="qr_id">
+
+      <label>Name:</label>
+      <input name="name" required>
+
+      <label>Date of Birth (YYYY-MM-DD):</label>
+      <input name="dob" required>
+
+      <label>Shelter:</label>
+      <input name="shelter" required>
+
+      <button type="submit">Assign</button>
+    </form>
+  </div>
+
+  <script>
+    const path = window.location.pathname;
+    const qrId = path.split('/').pop();
+    document.getElementById('qr_id').value = qrId;
+  </script>
+</body>
+</html>

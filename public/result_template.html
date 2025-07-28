@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Search Result</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .result-box {
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+      margin-top: 5rem;
+      animation: fadeIn 0.8s ease-in-out;
+    }
+
+    .result-box h2 {
+      color: #3742fa;
+    }
+
+    .result-box p {
+      font-size: 1.2rem;
+      margin: 1rem 0;
+    }
+
+    .back-button {
+      background: #57606f;
+      color: white;
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <div class="result-box">
+    <h2>Search Result</h2>
+    <p id="resultText"></p>
+    <a class="back-button" href="/Connected-in-crisis/">Back to Search</a>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const result = params.get('r');
+    document.getElementById('resultText').innerHTML = result || 'No result found.';
+
+  </script>
+  
+</body>
+</html>

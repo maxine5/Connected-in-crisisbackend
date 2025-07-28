@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>QR Code Assigned</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>QR Code Assigned</h1>
+  <p>The following evacuee has been successfully linked to this QR code.</p>
+
+  <div class="result-box">
+    <p><strong>Name:</strong> <span id="evacueeName"></span></p>
+    <p><strong>Date of Birth:</strong> <span id="evacueeDOB"></span></p>
+    <p><strong>Shelter:</strong> <span id="evacueeShelter"></span></p>
+  </div>
+
+  <div id="qrContainer" style="text-align:center; margin-top: 30px;">
+    <img id="qrCode" src="" alt="QR Code">
+  </div>
+
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const name = urlParams.get('name');
+    const dob = urlParams.get('dob');
+    const shelter = urlParams.get('shelter');
+    const pathParts = window.location.pathname.split('/');
+    const qrId = pathParts[pathParts.length - 1];
+
+    document.getElementById('evacueeName').textContent = name || 'Unknown';
+    document.getElementById('evacueeDOB').textContent = dob || 'Unknown';
+    document.getElementById('evacueeShelter').textContent = shelter || 'Unknown';
+
+    const qrData = encodeURIComponent(`${name} ${dob}`);
+    const url = `https://api.qrserver.com/v1/create-qr-code/?data=${qrData}&size=200x200`;
+
+    document.getElementById('qrCode').src = url;
+  </script>
+</body>
+</html>

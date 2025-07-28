@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Admin Dashboard</h1>
+
+  <h2>Add Evacuee</h2>
+  <!-- Add Evacuee -->
+<form method="POST" action="https://connected-in-crisisbackend.onrender.com/add-evacuee">
+    <label>Name:</label><input name="name" required><br>
+    <label>Date of Birth (YYYY-MM-DD):</label><input name="dob" required><br>
+    <label>Shelter Name:</label><input name="shelter" required><br>
+    <button type="submit">Add Evacuee</button>
+  </form>
+
+  <h2>Add Shelter</h2>
+  <!-- Add Shelter -->
+<form method="POST" action="https://connected-in-crisisbackend.onrender.com/add-shelter">
+    <label>Shelter Name:</label><input name="name" required><br>
+    <label>Address:</label><input name="address" required><br>
+    <button type="submit">Add Shelter</button>
+  </form> <h2>Delete Evacuee</h2>
+<!-- Delete Evacuee -->
+<form method="POST" action="https://connected-in-crisisbackend.onrender.com/delete-evacuee">
+  <label>Evacuee Name:</label><input name="name" required><br>
+  <label>Date of Birth (YYYY-MM-DD):</label><input name="dob" required><br>
+  
+  <label>Confirm Name:</label><input name="confirmName" required><br>
+  <label>Confirm DOB:</label><input name="confirmDob" required><br>
+
+  <button type="submit">Delete Evacuee</button>
+</form>
+
+</body>
+</html>
