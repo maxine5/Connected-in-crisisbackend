@@ -10,42 +10,43 @@
   <a href="/add-evacuee">
     <button>Add Evacuee</button>
   </a>
+<h2>QR Code Demos</h2>
+<div style="display: flex; gap: 20px; flex-wrap: wrap; justify-content: center;">
 
-  <h2>QR Code Demos</h2>
-
-<div>
-  <a href="/lookup?r=true" onclick="event.preventDefault(); document.getElementById('form1').submit();">
-    <img src="https://api.qrserver.com/v1/create-qr-code/?data=Alex%20Stone%201990-05-15&size=150x150" alt="QR 1">
-  </a>
-  <form id="form1" method="POST" action="https://connected-in-crisisbackend.onrender.com/lookup">
+  <form method="GET" action="https://connected-in-crisisbackend.onrender.com/lookup" style="display:inline;">
     <input type="hidden" name="name" value="Alex Stone">
     <input type="hidden" name="dob" value="1990-05-15">
+    <button type="submit" style="border:none; background:none; padding:0;">
+      <img src="https://api.qrserver.com/v1/create-qr-code/?data=Alex%20Stone%201990-05-15&size=150x150" alt="QR 1">
+    </button>
   </form>
 
-  <a href="/lookup?r=true" onclick="event.preventDefault(); document.getElementById('form2').submit();">
-    <img src="https://api.qrserver.com/v1/create-qr-code/?data=Jamie%20Lee%201982-11-03&size=150x150" alt="QR 2">
-  </a>
-  <form id="form2" method="POST" action="https://connected-in-crisisbackend.onrender.com/lookup">
+  <form method="GET" action="https://connected-in-crisisbackend.onrender.com/lookup" style="display:inline;">
     <input type="hidden" name="name" value="Jamie Lee">
     <input type="hidden" name="dob" value="1982-11-03">
+    <button type="submit" style="border:none; background:none; padding:0;">
+      <img src="https://api.qrserver.com/v1/create-qr-code/?data=Jamie%20Lee%201982-11-03&size=150x150" alt="QR 2">
+    </button>
   </form>
 
-  <a href="/lookup?r=true" onclick="event.preventDefault(); document.getElementById('form3').submit();">
-    <img src="https://api.qrserver.com/v1/create-qr-code/?data=Chris%20Moon%202001-01-01&size=150x150" alt="QR 3">
-  </a>
-  <form id="form3" method="POST" action="https://connected-in-crisisbackend.onrender.com/lookup">
+  <form method="GET" action="https://connected-in-crisisbackend.onrender.com/lookup" style="display:inline;">
     <input type="hidden" name="name" value="Chris Moon">
     <input type="hidden" name="dob" value="2001-01-01">
+    <button type="submit" style="border:none; background:none; padding:0;">
+      <img src="https://api.qrserver.com/v1/create-qr-code/?data=Chris%20Moon%202001-01-01&size=150x150" alt="QR 3">
+    </button>
   </form>
 
-  <a href="/lookup?r=true" onclick="event.preventDefault(); document.getElementById('form4').submit();">
-    <img src="https://api.qrserver.com/v1/create-qr-code/?data=Taylor%20Ray%202012-08-21&size=150x150" alt="QR 4">
-  </a>
-  <form id="form4" method="POST" action="https://connected-in-crisisbackend.onrender.com/lookup">
+  <form method="GET" action="https://connected-in-crisisbackend.onrender.com/lookup" style="display:inline;">
     <input type="hidden" name="name" value="Taylor Ray">
     <input type="hidden" name="dob" value="2012-08-21">
+    <button type="submit" style="border:none; background:none; padding:0;">
+      <img src="https://api.qrserver.com/v1/create-qr-code/?data=Taylor%20Ray%202012-08-21&size=150x150" alt="QR 4">
+    </button>
   </form>
+
 </div>
+
 <h2>Unassigned QR Codes</h2>
 <div style="display: flex; gap: 20px; flex-wrap: wrap; justify-content: center;">
   <a href="https://connected-in-crisisbackend.onrender.com/assign-qr/1"><img src="https://api.qrserver.com/v1/create-qr-code/?data=UNASSIGNED-1&size=120x120&color=200-200-200" alt="QR 1"></a>
