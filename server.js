@@ -298,9 +298,6 @@ app.post('/assign-qr', (req, res) => {
 
 
 // Show QR confirmation
-app.get('/qr-confirm/:qr_id', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public/qr_confirm.html'));
-});
 
 
 app.get('/qr-confirm/:qr_id', (req, res) => {
