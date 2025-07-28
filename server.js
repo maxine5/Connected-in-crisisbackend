@@ -6,6 +6,8 @@ const session = require('express-session');
 const fs = require('fs');
 
 const app = express();
+const cors = require('cors');
+app.use(cors());
 function logAdminAction(action, details) {
   const timestamp = new Date().toISOString();
   const entry = `[${timestamp}] ${action}: ${details}\n`;
