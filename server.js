@@ -54,9 +54,9 @@ app.post('/lookup', (req, res) => {
     if (err) return res.status(500).send('Error querying database.');
     if (row) {
       const result = `Name: ${name}<br>DOB: ${dob}<br>Shelter: ${row.shelter}`;
-      res.redirect(`/result_template.html?r=${encodeURIComponent(result)}`);
+      res.redirect(`https://maxine5.github.io/Connected-in-crisis/result_template.html?r=${encodeURIComponent(result)}`);
     } else {
-      res.redirect(`/result_template.html?r=${encodeURIComponent('No matching evacuee found.')}`);
+      res.redirect(`https://maxine5.github.io/Connected-in-crisis/result_template.html?r=${encodeURIComponent('No matching evacuee found.')}`);
     }
   });
 });
