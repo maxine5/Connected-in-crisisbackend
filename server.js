@@ -59,8 +59,9 @@ app.post('/lookup', (req, res) => {
     } else {
       res.redirect(`https://maxine5.github.io/Connected-in-crisis/result_template.html?r=${encodeURIComponent('No matching evacuee found.')}`);
     }
-  });
+     res.redirect(`/qr_confirm.html?name=${encodeURIComponent(evacuee.name)}&dob=${encodeURIComponent(evacuee.dob)}&shelter=${encodeURIComponent(evacuee.shelter)}`);
 });
+  });
 
 
 // Admin login page
