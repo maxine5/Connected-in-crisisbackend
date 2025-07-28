@@ -6,6 +6,7 @@ const session = require('express-session');
 const fs = require('fs');
 
 const app = express();
+app.use(express.urlencoded({ extended: true }));
 const cors = require('cors');
 app.use(cors());
 function logAdminAction(action, details) {
@@ -66,6 +67,9 @@ app.post('/lookup', (req, res) => {
 app.get('/admin', (req, res) => {
   res.sendFile(path.join(__dirname, 'public/admin_login.html'));
 });
+app.get('/admin-login', (req, res) => {
+  res.redirect('/admin'); 
+});
 
 // Admin login handling
 app.post('/admin-login', (req, res) => {
@@ -75,7 +79,7 @@ app.post('/admin-login', (req, res) => {
 
     res.redirect('/admin-dashboard');
   } else {
-    res.send('Invalid credentials');
+    res.status(401).send('Invalid credentials');
   }
 });
 // User login page
