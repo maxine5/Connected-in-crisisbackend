@@ -48,7 +48,12 @@
   <script>
     const params = new URLSearchParams(window.location.search);
     const result = params.get('r');
-    document.getElementById('resultText').innerHTML = result || 'No result found.';
+    if (result) {
+  const decoded = decodeURIComponent(result);
+  document.getElementById('resultText').innerHTML = decoded;
+} else {
+  document.getElementById('resultText').innerHTML = 'No result found.';
+}
 
   </script>
   

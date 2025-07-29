@@ -55,7 +55,7 @@ app.get('/', (req, res) => {
 });
 
 // Search route
-app.get('/lookup', (req, res) => {
+app.get("/lookup", (req, res) => {
   const { name, dob } = req.query;
   db.get('SELECT shelter FROM evacuees WHERE name = ? AND dob = ?', [name, dob], (err, row) => {
     if (err) {
@@ -127,7 +127,7 @@ app.get('/user-dashboard', (req, res) => {
   }
 });
 // Serve user add evacuee page
-app.get('/user-add-eacuee', (req, res) => {
+app.get('/user-add-evacuee', (req, res) => {
   if (req.session.user) {
     res.sendFile(path.join(__dirname, 'public/user_add_evacuee.html'));
   } else {
@@ -192,95 +192,6 @@ app.post('/delete-evacuee', (req, res) => {
     logAdminAction('DELETE_EVACUEE', `Name=${name}, DOB=${dob}`);
     res.redirect('/admin-dashboard');
   });
-});
-app.post('/assign-qr', (req, res) => {
-  console.log("QR FORM DATA:", req.body);
-  const { qr_id, name, dob, shelter } = req.body;
-
-  // First insert the evacuee into the evacuees table
-  db.run('INSERT INTO evacuees (name, dob, shelter) VALUES (?, ?, ?)', [name, dob, shelter], function (err) {
-    if (err) return res.status(500).send('Error saving evacuee.');
-
-    // Then link this evacuee to the QR ID
-    db.run('INSERT INTO qr_links (qr_id, name, dob) VALUES (?, ?, ?)', [qr_id, name, dob], function (err) {
-      if (err) return res.status(500).send('Error linking QR code.');
-      
-      res.redirect(`/qr-confirm/${qr_id}`);
-    });
-  });
-});
-
-app.get('/qr-confirm/:qrId', (req, res) => {
-  const { qrId } = req.params;
-
-  db.get('SELECT name, dob FROM qr_links WHERE qr_id = ?', [qrId], (err, row) => {
-    if (err || !row) return res.status(404).send('QR assignment not found.');
-
-    const qrData = `Name: ${row.name}\nDOB: ${row.dob}`;
-    const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?data=${encodeURIComponent(qrData)}&size=200x200`;
-
-    res.send(`
-      <!DOCTYPE html>
-      <html>
-        <head>
-          <title>QR Assigned</title>
-          <link rel="stylesheet" href="/style.css">
-          <style>
-            body { text-align: center; padding: 40px; font-family: Arial, sans-serif; }
-            .box {
-              background: white;
-              padding: 30px;
-              border-radius: 12px;
-              box-shadow: 0 0 10px rgba(0,0,0,0.2);
-              display: inline-block;
-            }
-          </style>
-        </head>
-        <body>
-          <div class="box">
-            <h2>QR Code Assigned</h2>
-            <p>This QR now links to:</p>
-            <p><strong>${row.name}</strong><br>DOB: ${row.dob}</p>
-            <img src="${qrUrl}" alt="QR Code"><br><br>
-            <a href="/user-dashboard"><button>Back to Dashboard</button></a>
-          </div>
-        </body>
-      </html>
-    `);
-  });
-});
-
-// Serve QR assignment form
-app.get('/assign-qr/:qr_id', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public/assign_qr.html'));
-});
-
-// Assign evacuee to QR code form
-app.get('/assign-qr/:qr_id', (req, res) => {
-  if (!req.session.authenticated && !req.session.user) {
-    return res.status(403).send('Unauthorized');
-  }
-
-  const qrId = req.params.qr_id;
-  res.send(`
-    <!DOCTYPE html>
-    <html>
-    <head>
-      <title>Assign QR ${qrId}</title>
-      <link rel="stylesheet" href="/style.css">
-    </head>
-    <body>
-      <h1>Assign QR Code #${qrId}</h1>
-      <form method="POST" action="/assign-qr">
-        <input type="hidden" name="qr_id" value="${qrId}">
-        <label>Name:</label><input name="name" required><br>
-        <label>Date of Birth (YYYY-MM-DD):</label><input name="dob" required><br>
-        <label>Shelter:</label><input name="shelter" required><br>
-        <button type="submit">Assign</button>
-      </form>
-    </body>
-    </html>
-  `);
 });
 
 // Process QR assignment form
