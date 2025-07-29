@@ -236,6 +236,9 @@ app.get('/qr-confirm/:qr_id', (req, res) => {
 app.use((req, res) => {
   res.status(404).send(`Route ${req.originalUrl} not found`);
 });
+app.get('/health', (req, res) => {
+  res.send('OK');
+});
 
 // Start the server
 const PORT = process.env.PORT || 10000;
